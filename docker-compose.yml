@@ -1,14 +1,14 @@
 # version: '3.8'
 
 services:
-  apache_symfony:
+  apache_symfony_photograpy_tomf:
     # nom du service
     build: apache # dossier contenant le Dockerfile
     container_name: apache_symfony # nom du container
     restart: always # redémarrage automatique
     ports:
       # ports exposés
-      - "80:80"
+      - "8085:80"
     volumes:
       # volumes montés
       - ./www:/var/www/html
@@ -18,20 +18,20 @@ services:
       - PHP_ERROR_REPORTING=E_ALL # afficher toutes les erreurs
       - PHP_DISPLAY_ERRORS=On # afficher les erreurs
 
-  mariadb_symfony:
+  mariadb_symfony_photograpy_tomf:
     # nom du service
     image: mariadb:latest # image à utiliser
     container_name: mariadb_symfony # nom du container
     restart: always # redémarrage automatique
     ports:
       # ports exposés
-      - "3306:3306"
+      - "3308:3306"
     environment:
       # variables d'environnement
-      - MYSQL_ROOT_PASSWORD=superAdmin # mot de passe root
-      - MYSQL_DATABASE=symfony # nom de la base de données
-      - MYSQL_USER=admin # nom de l'utilisateur
-      - MYSQL_PASSWORD=admin # mot de passe de l'utilisateur
+      - MYSQL_ROOT_PASSWORD=superAdminPhotography # mot de passe root
+      - MYSQL_DATABASE=symfony_photography_tomf # nom de la base de données
+      - MYSQL_USER=photography1 # nom de l'utilisateur
+      - MYSQL_PASSWORD=photographyMDP # mot de passe de l'utilisateur
     volumes:
       # volumes montés
       - ./mysql:/var/lib/mysql
