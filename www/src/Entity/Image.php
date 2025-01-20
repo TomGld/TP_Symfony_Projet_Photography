@@ -21,6 +21,13 @@ class Image
     #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'images')]
     private Collection $project;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imagePath = null;
+
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->project = new ArrayCollection();
@@ -51,6 +58,30 @@ class Image
     public function removeProject(Project $project): static
     {
         $this->project->removeElement($project);
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(string $imagePath): static
+    {
+        $this->imagePath = $imagePath;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
