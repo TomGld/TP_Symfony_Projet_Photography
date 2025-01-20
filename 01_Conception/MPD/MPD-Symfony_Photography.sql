@@ -10,26 +10,21 @@ CREATE TABLE `user` (
   `role` varchar(255)
 );
 
-CREATE TABLE `projet` (
+CREATE TABLE `project` (
   `id` integer PRIMARY KEY,
   `name` varchar(255),
   `dateStart` datetime,
   `dateEnd` datetime,
   `description` string,
   `owner_id` int,
-  `note_id` integer
+  `note_id` integer,
+  `collaborator` int
 );
 
 CREATE TABLE `note` (
   `id` integer PRIMARY KEY,
   `mediaNote` int,
   `userNote` int
-);
-
-CREATE TABLE `collaborator` (
-  `project_id` int,
-  `user_id` int,
-  PRIMARY KEY (`project_id`, `user_id`)
 );
 
 CREATE TABLE `image` (
@@ -39,23 +34,21 @@ CREATE TABLE `image` (
   `user_id` int
 );
 
-ALTER TABLE `user` ADD FOREIGN KEY (`id`) REFERENCES `projet` (`owner_id`);
-
 ALTER TABLE `image` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `projet` ADD FOREIGN KEY (`id`) REFERENCES `image` (`project_id`);
+ALTER TABLE `project` ADD FOREIGN KEY (`id`) REFERENCES `image` (`project_id`);
 
-CREATE TABLE `collaborator_user` (
-  `collaborator_user_id` int,
+ALTER TABLE `project` ADD FOREIGN KEY (`note_id`) REFERENCES `note` (`id`);
+
+CREATE TABLE `user_project` (
   `user_id` integer,
-  PRIMARY KEY (`collaborator_user_id`, `user_id`)
+  `project_collaborator` int,
+  PRIMARY KEY (`user_id`, `project_collaborator`)
 );
 
-ALTER TABLE `collaborator_user` ADD FOREIGN KEY (`collaborator_user_id`) REFERENCES `collaborator` (`user_id`);
+ALTER TABLE `user_project` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `collaborator_user` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `user_project` ADD FOREIGN KEY (`project_collaborator`) REFERENCES `project` (`collaborator`);
 
 
-ALTER TABLE `projet` ADD FOREIGN KEY (`id`) REFERENCES `collaborator` (`project_id`);
-
-ALTER TABLE `projet` ADD FOREIGN KEY (`note_id`) REFERENCES `note` (`id`);
+ALTER TABLE `user` ADD FOREIGN KEY (`id`) REFERENCES `project` (`owner_id`);
