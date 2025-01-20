@@ -1,0 +1,7 @@
+user(id, email, password, firstname, lastname, age, city, country, role)
+note(id, mediaNote, userNote)
+collaborator(#project_id, #user_id)
+image(id, #project_id, imagePath, #user_id)
+projet(id, name, dateStart, dateEnd, description, #owner_id, #note_id)
+
+#foreign key
