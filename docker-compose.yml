@@ -4,7 +4,7 @@ services:
   apache_symfony_photograpy_tomf:
     # nom du service
     build: apache # dossier contenant le Dockerfile
-    container_name: apache_symfony # nom du container
+    container_name: apache_symfony_photograpy_tomf # nom du container
     restart: always # redémarrage automatique
     ports:
       # ports exposés
@@ -21,7 +21,7 @@ services:
   mariadb_symfony_photograpy_tomf:
     # nom du service
     image: mariadb:latest # image à utiliser
-    container_name: mariadb_symfony # nom du container
+    container_name: mariadb_symfony_photograpy_tomf # nom du container
     restart: always # redémarrage automatique
     ports:
       # ports exposés
