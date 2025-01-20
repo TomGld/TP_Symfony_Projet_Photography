@@ -37,9 +37,16 @@ class Project
     #[ORM\ManyToMany(targetEntity: Image::class, mappedBy: 'project')]
     private Collection $images;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
+    private Collection $collaborator;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->collaborator = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +137,30 @@ class Project
         if ($this->images->removeElement($image)) {
             $image->removeProject($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getCollaborator(): Collection
+    {
+        return $this->collaborator;
+    }
+
+    public function addCollaborator(User $collaborator): static
+    {
+        if (!$this->collaborator->contains($collaborator)) {
+            $this->collaborator->add($collaborator);
+        }
+
+        return $this;
+    }
+
+    public function removeCollaborator(User $collaborator): static
+    {
+        $this->collaborator->removeElement($collaborator);
 
         return $this;
     }
