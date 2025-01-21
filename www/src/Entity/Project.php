@@ -43,6 +43,10 @@ class Project
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
     private Collection $collaborator;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Note $note = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -161,6 +165,18 @@ class Project
     public function removeCollaborator(User $collaborator): static
     {
         $this->collaborator->removeElement($collaborator);
+
+        return $this;
+    }
+
+    public function getNote(): ?Note
+    {
+        return $this->note;
+    }
+
+    public function setNote(Note $note): static
+    {
+        $this->note = $note;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Image;
+use App\Entity\Note;
 use App\Entity\Project;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,6 +22,7 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $this->loadUsers($manager);
+        $this->loadNotes($manager);
         $this->loadProjects($manager);
         $this->loadImages($manager);
         $manager->flush();
@@ -86,6 +88,7 @@ class AppFixtures extends Fixture
                     'date_start' => '2024-12-22',
                     'date_end' => '2024-12-22',
                     'owner_id' => 1,
+                    'note_id' => 1,
                 ],
                 [
                     'name' => 'Projet 2',
@@ -93,6 +96,7 @@ class AppFixtures extends Fixture
                     'date_start' => '2025-01-06',
                     'date_end' => '2025-01-06',
                     'owner_id' => 2,
+                    'note_id' => 2,
                 ],
             ];
 
@@ -105,6 +109,7 @@ class AppFixtures extends Fixture
             $project->setDateEnd(new \DateTime($value['date_end']));
             //Lui donner un objet à partir de la valeur de la clé 'owner_id'
             $project->setOwner($this->getReference('user_' . $value['owner_id']));
+            $project->setNote($this->getReference('note_' . $value['note_id']));
             $manager->persist($project);
         }
     }
@@ -132,6 +137,33 @@ class AppFixtures extends Fixture
             //Lui donner un objet à partir de la valeur de la clé 'user_id'
             $image->setUser($this->getReference('user_' . $value['user_id']));
             $manager->persist($image);
+        }
+    }
+
+    public function loadNotes(ObjectManager $manager): void
+    {
+        //On crée un tableau avec les infos des notes
+        $array_notes =
+            [
+                [
+                    'media_note' => 15,
+                    'user_note' => 19,
+                ],
+                [
+                'media_note' => 17,
+                'user_note' => 12,
+                ],
+            ];
+
+        foreach ($array_notes as $key => $value) {
+
+            $note = new Note();
+            $note->setMediaNote($value['media_note']);
+            $note->setUserNote($value['user_note']);
+            $manager->persist($note);
+
+            //Définition des références
+            $this->addReference('note_' . $key + 1, $note);
         }
     }
 }
