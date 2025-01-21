@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Image;
 use App\Entity\Project;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,6 +22,7 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
         $this->loadUsers($manager);
         $this->loadProjects($manager);
+        $this->loadImages($manager);
         $manager->flush();
     }
 
@@ -104,6 +106,32 @@ class AppFixtures extends Fixture
             //Lui donner un objet à partir de la valeur de la clé 'owner_id'
             $project->setOwner($this->getReference('user_' . $value['owner_id']));
             $manager->persist($project);
+        }
+    }
+
+    //Ajout du chemin de l'image en DB pour chaque user
+    public function loadImages(ObjectManager $manager): void
+    {
+        //On crée un tableau avec les infos des images
+        $array_images =
+            [
+                [
+                    'image_path' => 'images/user_images/IMG_0832.jpeg',
+                    'user_id' => 1,
+                ],
+                [
+                    'image_path' => 'images/user_images/IMG_0664_EDITED1.jpg',
+                    'user_id' => 2,
+                ],
+            ];
+
+        foreach ($array_images as $key => $value) {
+
+            $image = new Image();
+            $image->setImagePath($value['image_path']);
+            //Lui donner un objet à partir de la valeur de la clé 'user_id'
+            $image->setUser($this->getReference('user_' . $value['user_id']));
+            $manager->persist($image);
         }
     }
 }
