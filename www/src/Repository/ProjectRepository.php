@@ -16,28 +16,33 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
-//    /**
-//     * @return Project[] Returns an array of Project objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * A TERMINER
+     * Méthode qui permet de récupérer tous les données du projet : image_path, name, date_start, date_end, description, owner_id, note_id
+     * @param int $id
+     * @return array
+     */
+    public function findAllDataProject(int $id): array
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+        $query = $qb->select([
+            'p.name',
+            'p.date_start',
+            'p.date_end',
+            'p.description',
+            'p.owner_id',
+            'p.note_id',
+            'i.image_path',
 
-//    public function findOneBySomeField($value): ?Project
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+        ])->from(Project::class, 'p')
+        ->join ('p.image', 'i')
+        ->where('p.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery();
+
+        return $query->getResult();
+        
+    }
 }
