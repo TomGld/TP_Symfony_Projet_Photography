@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Project;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -19,6 +20,7 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $this->loadUsers($manager);
+        $this->loadProjects($manager);
         $manager->flush();
     }
 
@@ -68,6 +70,40 @@ class AppFixtures extends Fixture
 
             //Définition des références
             $this->addReference('user_' . $key + 1, $user);
+        }
+    }
+
+    public function loadProjects(ObjectManager $manager): void
+    {
+        //On crée un tableau avec les infos des projets
+        $array_projects =
+            [
+                [
+                    'name' => 'Montagnes dorées',
+                    'description' => 'Un projet sur plusieurs jours, où l\'on perçoit la beauté de paysages visibles par tous.',
+                    'date_start' => '2024-12-22',
+                    'date_end' => '2024-12-22',
+                    'owner_id' => 1,
+                ],
+                [
+                    'name' => 'Projet 2',
+                    'description' => 'un ciel doré, un soleil couchant, accompagné d\'oiseaux volant en coeur.',
+                    'date_start' => '2025-01-06',
+                    'date_end' => '2025-01-06',
+                    'owner_id' => 2,
+                ],
+            ];
+
+        foreach ($array_projects as $key => $value) {
+
+            $project = new Project();
+            $project->setName($value['name']);
+            $project->setDescription($value['description']);
+            $project->setDateStart(new \DateTime($value['date_start']));
+            $project->setDateEnd(new \DateTime($value['date_end']));
+            //Lui donner un objet à partir de la valeur de la clé 'owner_id'
+            $project->setOwner($this->getReference('user_' . $value['owner_id']));
+            $manager->persist($project);
         }
     }
 }

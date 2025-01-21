@@ -32,3 +32,6 @@ alias db-import='sudo docker exec $(docker ps --format '{{.Names}}' | grep maria
 
 # alias pour donner les droits sur le projet
 alias s777='sudo chmod -R 777 ./'
+
+# alias pour supprimer la bdd, la recréer, la migrer et la peupler avec cconsole (d:d:d --force; d:d:c; d:m:m; d:f:l)
+alias dbresetload='cconsole d:d:d --force && cconsole d:d:c && cconsole d:m:m && cconsole d:f:l'
