@@ -1,0 +1,42 @@
+{% set dateStart = project.dateStart|date('d/m/Y') %} {# Déclarer une variable #}
+{% set dateEnd = project.dateEnd|date('d/m/Y') %} {# Déclarer une variable #}
+<div class="game-detail-card">
+    <div>
+        <div class="game-detail-content">
+            <h2 class="game-title">{{project.name}}</h2>
+            <p class="game-consoles mb-3">{{project.description}}</p>
+            {# if dateStart = dateEnd alors n'afficher que dateEnd sinon, afficher dateStart ET dateEnd  #}
+            {% if dateStart == dateEnd %}
+                <p class="date">{{dateEnd}}</p>
+            {% else %}
+                <p class="date">{{dateStart}}</p>
+                <p class="date">{{dateEnd}}</p>
+            {% endif %}
+            
+            <div class="collaborator">
+                <p>{{project.owner_id}}</p>
+                {# if owner > 1 alors boucler sur owner pour afficher tous les collaborateurs sinon afficher owner.firstname et owner.lastname #}
+                {% if project.owner_id > 1 %}
+                    <p>Détenteurs du projet :</p>
+                    {# Boucler sur project.owner_id pour afficher tous les collaborateurs #}
+                    {% for collaborator in owner %}
+                        {# Afficher le firstname de project.owner_id par la méthode findUserById#}
+                        <p>{{collaborator.firstname}}2222</p>
+                        <p>{{collaborator.lastname}}222</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Détenteur du projet : {{owner.firstname}} {{owner.lastname}}</p>
+                {% endif %}
+
+            </div>
+            
+
+
+
+        <div class="game-detail-image">
+            {# TODO: Ajouter l'image #}
+        </div>
+
+        </div>
+    </div>
+</div>

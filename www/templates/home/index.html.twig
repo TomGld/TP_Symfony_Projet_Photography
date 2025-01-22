@@ -4,6 +4,19 @@
 
 {% block body %}
 
-    {% include 'components/_detail_card.html.twig' %}
+<div class="container mt-5">
+    <header>
+        <h1 class="text-center mb-5 display-4">{{title|default('Photography')}}</h1>
+    </header>
+
+
+    <div class="game-grid">
+    {% for project in projects %}
+        {% include "components/_project_card.html.twig" with {'project':project} %}
+    {% endfor %}
+        
+    </div>
+
+</div>
 
 {% endblock %}
