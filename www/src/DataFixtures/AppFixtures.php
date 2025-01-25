@@ -92,9 +92,13 @@ class AppFixtures extends Fixture
                 'user_note' => 12,
             ],
             [
+                'media_note' => 19,
+                'user_note' => 19,
+            ],
+            [
                 'media_note' => 20,
                 'user_note' => 20,
-            ]
+            ],
         ];
 
         foreach ($array_notes as $key => $value) {
@@ -139,7 +143,18 @@ class AppFixtures extends Fixture
                 'note_id' => 3,
                 //Ajout de collaborateur plusieurs collaborator (1, 2)
                 'collaborator_id' => [1, 2, 3],
-            ]
+            ],
+            [
+                'name' => 'Chat et oiseaux',
+                'description' => 'L\'histoire d\'une vie.',
+                'date_start' => '2026-01-06',
+                'date_end' => '2026-01-06',
+                'owner_id' => 3,
+                'note_id' => 4,
+                //Ajout de collaborateur plusieurs collaborator (1, 2)
+                'collaborator_id' => [1, 2],
+            ],
+
         ];
 
         foreach ($array_projects as $key => $value) {
@@ -203,6 +218,14 @@ class AppFixtures extends Fixture
             [
                 'image_id' => 3,
                 'project_id' => 3,
+            ],
+            [
+                'image_id' => 2,
+                'project_id' => 4,
+            ],
+            [
+                'image_id' => 3,
+                'project_id' => 4,
             ],
         ];
 
