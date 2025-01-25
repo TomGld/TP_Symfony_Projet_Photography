@@ -14,14 +14,19 @@ class HomeController extends AbstractController
     public function index(ProjectRepository $projectRepository, UserRepository $userRepository): Response
     {
         $title = 'Projects :';
-        $projects = $projectRepository->findAllProjectsAndImages();
-        $owner = $userRepository->find($projects[0]['owner_id']);
+        $projects = $projectRepository->findAllProjectsImagesCollaborators();
+        //$collaborators = $userRepository->find($projects[0]['collaborator_id']);
+
+
         
+
+
+        
+
         return $this->render('home/index.html.twig', [
 
             'projects' => $projects,
             'title' => $title,
-            'owner' => $owner
         ]);
     }
     

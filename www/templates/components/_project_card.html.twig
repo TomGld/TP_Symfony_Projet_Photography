@@ -13,20 +13,24 @@
                 <p class="date">{{dateEnd}}</p>
             {% endif %}
             
-            <div class="collaborator">
-                <p>{{project.owner_id}}</p>
-                {# if owner > 1 alors boucler sur owner pour afficher tous les collaborateurs sinon afficher owner.firstname et owner.lastname #}
-                {% if project.owner_id > 1 %}
-                    <p>Détenteurs du projet :</p>
-                    {# Boucler sur project.owner_id pour afficher tous les collaborateurs #}
-                    {% for collaborator in owner %}
-                        {# Afficher le firstname de project.owner_id par la méthode findUserById#}
-                        <p>{{collaborator.firstname}}2222</p>
-                        <p>{{collaborator.lastname}}222</p>
-                    {% endfor %}
+            <div class="collaborators">
+                {% if project.collaborators is not empty %}
+                    {% if project.collaborators|length == 1 %}
+                        <h3>🤵🏻 Détenteur du projet :</h3>
+                    {% else %}
+                        <h3>🤵🏻 Collaborateurs :</h3>
+                    {% endif %}
+
+                    <ul>
+                        {% for collaborator in project.collaborators %}
+                            <li>{{ collaborator.firstname }} {{collaborator.lastname}}</li>
+                        {% endfor %}
+                    </ul>
                 {% else %}
-                    <p>Détenteur du projet : {{owner.firstname}} {{owner.lastname}}</p>
+                    <p>Le projet est en cours de création</p>
                 {% endif %}
+
+
 
             </div>
             

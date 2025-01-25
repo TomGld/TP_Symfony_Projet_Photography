@@ -104,16 +104,18 @@ class AppFixtures extends Fixture
                 'date_end' => '2024-12-22',
                 'owner_id' => 1,
                 'note_id' => 1,
-                'collaborator_id' => 1,
+                'collaborator_id' => [1],
             ],
             [
-                'name' => 'Projet 2',
+                'name' => 'Liberté au plus haut',
                 'description' => 'un ciel doré, un soleil couchant, accompagné d\'oiseaux volant en coeur.',
                 'date_start' => '2025-01-06',
                 'date_end' => '2025-01-06',
                 'owner_id' => 2,
                 'note_id' => 2,
-                'collaborator_id' => 2,
+                //Ajout de collaborateur plusieurs collaborator (1, 2)
+
+                'collaborator_id' => [1, 2],
             ],
         ];
 
@@ -125,7 +127,10 @@ class AppFixtures extends Fixture
             $project->setDateEnd(new \DateTime($value['date_end']));
             $project->setOwner($this->getReference('user_' . $value['owner_id'], User::class));
             $project->setNote($this->getReference('note_' . $value['note_id'], Note::class));
-            $project->addCollaborator($this->getReference('user_' . $value['collaborator_id'], User::class));
+            // Ajouter les collaborateurs
+            foreach ($value['collaborator_id'] as $collaborator_id) {
+                $project->addCollaborator($this->getReference('user_' . $collaborator_id, User::class));
+            }
             $manager->persist($project);
 
             // Définir une référence pour chaque projet
