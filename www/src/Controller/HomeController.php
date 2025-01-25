@@ -10,10 +10,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(ProjectRepository $projectRepository, UserRepository $userRepository): Response
     {
-        $title = 'Projects :';
+        $title = 'Tous les projets :';
         $projects = $projectRepository->findAllProjectsImagesCollaborators();
         
         
@@ -24,5 +24,24 @@ class HomeController extends AbstractController
             'title' => $title,
         ]);
     }
-    
+
+
+
+    #[Route('/detail/{id}', name: 'app_detail')]
+    public function projectById(ProjectRepository $projectRepository, int $id): Response
+    {
+        //On récupère le jeux avec ses notes et son age
+        $project = $projectRepository->findProjectImagesCollaboratorsById($id);
+        
+        //
+        
+        //On récupère le titre
+        $title = $project['name'];
+
+
+        return $this->render('home/detail.html.twig', [
+            'project' => $project,
+            'title' => $title
+        ]);
+    }
 }

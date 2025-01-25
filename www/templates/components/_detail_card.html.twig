@@ -1,0 +1,58 @@
+{% set dateStart = project.dateStart|date('d/m/Y') %} {# Déclarer une variable #}
+{% set dateEnd = project.dateEnd|date('d/m/Y') %} {# Déclarer une variable #}
+<div class="game-detail-card">
+
+
+    {# Boucle images #}
+    <div class="game-detail-image">
+        {% for image in project.images %}
+            <img src="{{asset('user_images/' ~ image.imagePath)}}" alt="Image du projet \"{{project.name}}\"">
+        {% endfor %}
+    </div>
+
+    <div class="game-detail-content">
+        <p class="game-title">{{project.name}}</p>
+        <p class="title-description">Description :</p>
+        <p class="description">{{project.description}}</p>
+        {# if dateStart = dateEnd alors n'afficher que dateEnd sinon, afficher dateStart ET dateEnd  #}
+        {% if dateStart == dateEnd %}
+            <p class="date">Date du projet : {{dateEnd}}</p>
+        {% else %}
+            <p class="date">Date de création du projet : {{dateStart}}</p>
+            <p class="date">Date de fin du projet :{{dateEnd}}</p>
+        {% endif %}
+
+
+        
+        <div class="collaborators">
+        
+            {% if project.collaborators is not empty %}
+                {% if project.collaborators|length == 1 %}
+                    <h3>🤵🏻 Détenteur du projet :</h3>
+                {% else %}
+                    <h3>🤵🏻 Collaborateurs :</h3>
+                {% endif %}
+                    {# Foreach des collaborateurs et rajouter un . à la fin du dernier #}
+                <p>
+
+                    {% for collaborator in project.collaborators %}
+                        {{ collaborator.firstname }} {{collaborator.lastname}}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% else %}
+                <p>Le projet est en cours de création, les collaborateurs seront bientôt visibles.</p>
+            {% endif %}
+        
+        </div>
+    </div>
+</div>
+
+<p class="collaborators-list-line">
+                        {% for collaborator in project.collaborators %}
+                            {{ collaborator.firstname }} {{collaborator.lastname}},
+                        {% endfor %}
+                    </p>
+
+        
+
+    
