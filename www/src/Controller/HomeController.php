@@ -33,7 +33,7 @@ class HomeController extends AbstractController
         //On récupère le jeux avec ses notes et son age
         $project = $projectRepository->findProjectImagesCollaboratorsById($id);
         
-        //
+        
         
         //On récupère le titre
         $title = $project['name'];

@@ -89,7 +89,7 @@ class ProjectRepository extends ServiceEntityRepository
 
 
     /**
-     * Méthode qui récupère un projet, ses images et collaborateurs associés depuis la table project, image_project, project_user,
+     * Méthode qui récupère un projet, ses images, collaborateurs, mediaNote et userNote associés depuis la table project, image_project, project_user,
      * @param int $id
      * @return array|null
      */
@@ -110,10 +110,13 @@ class ProjectRepository extends ServiceEntityRepository
             'c.lastname AS collaborator_lastname',
             'i.id AS image_id',
             'i.imagePath AS image_path',
+            'n.mediaNote AS media_note',
+            'n.userNote AS user_note',
         ])
             ->from(Project::class, 'p')
             ->leftJoin('p.images', 'i')
             ->leftJoin('p.collaborator', 'c')    // Jointure gauche pour inclure les collaborateurs (s'il y en a)
+            ->leftJoin('p.note', 'n')            // Jointure gauche pour inclure les notes
             ->where('p.id = :id')
             ->setParameter('id', $id)
             ->getQuery();
@@ -131,6 +134,8 @@ class ProjectRepository extends ServiceEntityRepository
             'dateStart' => $results[0]['project_date_start'],
             'dateEnd' => $results[0]['project_date_end'],
             'description' => $results[0]['project_description'],
+            'mediaNote' => $results[0]['media_note'],
+            'userNote' => $results[0]['user_note'],
             'images' => [],
             'collaborators' => [],
         ];
