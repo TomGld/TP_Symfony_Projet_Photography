@@ -8,7 +8,7 @@
             {# Boucle images #}
             <div class="game-detail-image">
                 {% for image in project.images %}
-                    <img src="{{asset('user_images/' ~ image.path)}}" alt="Image du projet \"{{project.name}}\"">
+                    <img src="{{asset('user_images/' ~ image.imagePath)}}" alt="Image du projet \"{{project.name}}\"">
                 {% endfor %}
             </div>
 

@@ -104,21 +104,15 @@ class ProjectRepository extends ServiceEntityRepository
                     'lastname' => $result['collaborator_lastname'],
                 ];
             }
-
-            // Ajouter une image uniquement si elle existe
-            if (!empty($result['image_id'])) {
+        
+            // Ajouter une image uniquement si elle n'a pas déjà été ajoutée
+            if (!empty($result['image_id']) && !in_array($result['image_id'], array_column($projects[$projectId]['images'], 'id'))) {
                 $projects[$projectId]['images'][] = [
                     'id' => $result['image_id'],
-                    'path' => $result['image_path'],
+                    'imagePath' => $result['image_path'],
                 ];
             }
-            
         }
-
-
-
-
-
         return array_values($projects); // Retourner les projets sous forme de tableau indexé
     }
 

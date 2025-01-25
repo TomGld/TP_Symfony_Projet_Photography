@@ -51,6 +51,16 @@ class AppFixtures extends Fixture
                 'country' => 'France',
                 'roles' => ['ROLE_USER']
             ],
+            [
+                'email' => 'tom@tom.com',
+                'password' => 'tom',
+                'firstname' => 'nameTom',
+                'lastname' => 'lastnameTom',
+                'age' => '2008-01-01',
+                'city' => 'Perpignan',
+                'country' => 'France',
+                'roles' => ['ROLE_USER']
+            ],
         ];
 
         foreach ($array_users as $key => $value) {
@@ -81,6 +91,10 @@ class AppFixtures extends Fixture
                 'media_note' => 17,
                 'user_note' => 12,
             ],
+            [
+                'media_note' => 20,
+                'user_note' => 20,
+            ]
         ];
 
         foreach ($array_notes as $key => $value) {
@@ -114,9 +128,18 @@ class AppFixtures extends Fixture
                 'owner_id' => 2,
                 'note_id' => 2,
                 //Ajout de collaborateur plusieurs collaborator (1, 2)
-
                 'collaborator_id' => [1, 2],
             ],
+            [
+                'name' => 'CAT',
+                'description' => 'Un chat qui rugit.',
+                'date_start' => '2026-01-06',
+                'date_end' => '2026-01-06',
+                'owner_id' => 3,
+                'note_id' => 3,
+                //Ajout de collaborateur plusieurs collaborator (1, 2)
+                'collaborator_id' => [1, 2, 3],
+            ]
         ];
 
         foreach ($array_projects as $key => $value) {
@@ -149,6 +172,10 @@ class AppFixtures extends Fixture
                 'image_path' => 'IMG_0664_EDITED1.jpg',
                 'user_id' => 2,
             ],
+            [
+                'image_path' => 'IMG_0240.png',
+                'user_id' => 3,
+            ],
         ];
 
         foreach ($array_images as $key => $value) {
@@ -172,6 +199,10 @@ class AppFixtures extends Fixture
             [
                 'image_id' => 2,
                 'project_id' => 2,
+            ],
+            [
+                'image_id' => 3,
+                'project_id' => 3,
             ],
         ];
 
