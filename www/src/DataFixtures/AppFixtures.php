@@ -142,11 +142,11 @@ class AppFixtures extends Fixture
     {
         $array_images = [
             [
-                'image_path' => 'images/user_images/IMG_0832.jpeg',
+                'image_path' => 'IMG_0832.jpeg',
                 'user_id' => 1,
             ],
             [
-                'image_path' => 'images/user_images/IMG_0664_EDITED1.jpg',
+                'image_path' => 'IMG_0664_EDITED1.jpg',
                 'user_id' => 2,
             ],
         ];

@@ -68,8 +68,11 @@ class ProjectRepository extends ServiceEntityRepository
             'c.id AS collaborator_id',
             'c.firstname AS collaborator_firstname',
             'c.lastname AS collaborator_lastname',
+            'i.id AS image_id',
+            'i.imagePath AS image_path',
         ])
             ->from(Project::class, 'p')
+            ->leftJoin('p.images', 'i')  
             ->leftJoin('p.collaborator', 'c')    // Jointure gauche pour inclure les collaborateurs (s'il y en a)
             ->getQuery();
 
@@ -88,6 +91,7 @@ class ProjectRepository extends ServiceEntityRepository
                     'dateStart' => $result['project_date_start'],
                     'dateEnd' => $result['project_date_end'],
                     'description' => $result['project_description'],
+                    'images' => [], // Initialisation du tableau des images
                     'collaborators' => [], // Initialisation du tableau des collaborateurs
                 ];
             }
@@ -100,7 +104,20 @@ class ProjectRepository extends ServiceEntityRepository
                     'lastname' => $result['collaborator_lastname'],
                 ];
             }
+
+            // Ajouter une image uniquement si elle existe
+            if (!empty($result['image_id'])) {
+                $projects[$projectId]['images'][] = [
+                    'id' => $result['image_id'],
+                    'path' => $result['image_path'],
+                ];
+            }
+            
         }
+
+
+
+
 
         return array_values($projects); // Retourner les projets sous forme de tableau indexé
     }

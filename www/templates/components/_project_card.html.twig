@@ -4,6 +4,15 @@
     <div>
         <div class="game-detail-content">
             <h2 class="game-title">{{project.name}}</h2>
+            
+            {# Boucle images #}
+            <div class="game-detail-image">
+                {% for image in project.images %}
+                    <img src="{{asset('user_images/' ~ image.path)}}" alt="Image du projet \"{{project.name}}\"">
+                {% endfor %}
+            </div>
+
+
             <p class="game-consoles mb-3">{{project.description}}</p>
             {# if dateStart = dateEnd alors n'afficher que dateEnd sinon, afficher dateStart ET dateEnd  #}
             {% if dateStart == dateEnd %}
@@ -14,6 +23,7 @@
             {% endif %}
             
             <div class="collaborators">
+            
                 {% if project.collaborators is not empty %}
                     {% if project.collaborators|length == 1 %}
                         <h3>🤵🏻 Détenteur du projet :</h3>
@@ -33,14 +43,6 @@
 
 
             </div>
-            
-
-
-
-        <div class="game-detail-image">
-            {# TODO: Ajouter l'image #}
-        </div>
-
         </div>
     </div>
 </div>

@@ -15,12 +15,7 @@ class HomeController extends AbstractController
     {
         $title = 'Projects :';
         $projects = $projectRepository->findAllProjectsImagesCollaborators();
-        //$collaborators = $userRepository->find($projects[0]['collaborator_id']);
-
-
         
-
-
         
 
         return $this->render('home/index.html.twig', [
