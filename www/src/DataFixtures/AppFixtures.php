@@ -24,6 +24,7 @@ class AppFixtures extends Fixture
         $this->loadNotes($manager);
         $this->loadProjects($manager);
         $this->loadImages($manager);
+        $this->loadImageProjects($manager);
         $manager->flush();
     }
 
@@ -126,6 +127,9 @@ class AppFixtures extends Fixture
             $project->setNote($this->getReference('note_' . $value['note_id'], Note::class));
             $project->addCollaborator($this->getReference('user_' . $value['collaborator_id'], User::class));
             $manager->persist($project);
+
+            // Définir une référence pour chaque projet
+            $this->addReference('project_' . ($key + 1), $project);
         }
     }
 
@@ -142,11 +146,38 @@ class AppFixtures extends Fixture
             ],
         ];
 
-        foreach ($array_images as $value) {
+        foreach ($array_images as $key => $value) {
             $image = new Image();
             $image->setImagePath($value['image_path']);
             $image->setUser($this->getReference('user_' . $value['user_id'], User::class));
             $manager->persist($image);
+
+            // Définir une référence pour chaque image
+            $this->addReference('image_' . ($key + 1), $image);
         }
     }
+
+    public function loadImageProjects(ObjectManager $manager): void
+    {
+        $array_image_projects = [
+            [
+                'image_id' => 1,
+                'project_id' => 1,
+            ],
+            [
+                'image_id' => 2,
+                'project_id' => 2,
+            ],
+        ];
+
+        foreach ($array_image_projects as $value) {
+            $image = $this->getReference('image_' . $value['image_id'], Image::class);
+            $project = $this->getReference('project_' . $value['project_id'], Project::class);
+
+            // Ajouter l'image au projet
+            $project->addImage($image);
+            $manager->persist($project);
+        }
+    }
+
 }
