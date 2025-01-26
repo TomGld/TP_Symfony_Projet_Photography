@@ -48,31 +48,31 @@ class ProjectCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            //On redéfinit les actions de la page index
-            ->update(
-                Crud::PAGE_INDEX, //Travail sur la page d'index
-                Action::NEW, //Sur quelle action on veut modifier.
-                fn(Action $action) => $action
-                    ->setIcon('fa fa-plus') //On redéfinit l'icône de l'action
-                    ->setLabel('Ajouter') //On redéfinit le label de l'action
-                    ->setCssClass('btn btn-success') //On redéfinit la classe CSS de l'action
-            )
-            ->update(
-                Crud::PAGE_INDEX,
-                Action::EDIT,
-                fn(Action $action) => $action
-                    ->setIcon('fa fa-edit')
-                    ->setLabel('Modifier')
-                    ->setCssClass('btn btn-info')
-            )
-            ->update(
-                Crud::PAGE_INDEX,
-                Action::DELETE,
-                fn(Action $action) => $action
-                    ->setIcon('fa fa-trash')
-                    ->setLabel('Supprimer')
-                    ->setCssClass('btn btn-danger')
-            )
+        //On redéfinit les actions de la page index
+        ->update(
+            Crud::PAGE_INDEX, //Travail sur la page d'index
+            Action::NEW, //Sur quelle action on veut modifier.
+            fn(Action $action) => $action
+                ->setIcon('fa fa-plus') //On redéfinit l'icône de l'action
+                ->setLabel('Ajouter') //On redéfinit le label de l'action
+                ->setCssClass('btn btn-success') //On redéfinit la classe CSS de l'action
+        )
+        ->update(
+            Crud::PAGE_INDEX,
+            Action::EDIT,
+            fn(Action $action) => $action
+                ->setIcon('fa fa-edit')
+                ->setLabel('Modifier')
+                ->setCssClass('btn btn-info')
+        )
+        ->update(
+            Crud::PAGE_INDEX,
+            Action::DELETE,
+            fn(Action $action) => $action
+                ->setIcon('fa fa-trash')
+                ->setLabel('Supprimer')
+                ->setCssClass('btn btn-danger')
+        )
         ;
     }
 
@@ -164,5 +164,4 @@ class ProjectCrudController extends AbstractCrudController
         }
         parent::updateEntity($entityManager, $entityInstance);
     }
-
 }

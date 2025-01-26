@@ -34,9 +34,9 @@ class AppFixtures extends Fixture
             [
                 'email' => 'admin@admin.com',
                 'password' => 'admin',
-                'firstname' => 'nameAdmin',
-                'lastname' => 'lastnameAdmin',
-                'age' => '2006-01-01',
+                'firstname' => 'Adminstrateur',
+                'lastname' => 'Système',
+                'age' => '2008-01-01',
                 'city' => 'Paris',
                 'country' => 'France',
                 'roles' => ['ROLE_ADMIN']
@@ -44,8 +44,8 @@ class AppFixtures extends Fixture
             [
                 'email' => 'user@user.com',
                 'password' => 'user',
-                'firstname' => 'nameUser',
-                'lastname' => 'lastnameUser',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'DuSite',
                 'age' => '2007-01-01',
                 'city' => 'Perpignan',
                 'country' => 'France',
@@ -54,9 +54,9 @@ class AppFixtures extends Fixture
             [
                 'email' => 'tom@tom.com',
                 'password' => 'tom',
-                'firstname' => 'nameTom',
-                'lastname' => 'lastnameTom',
-                'age' => '2008-01-01',
+                'firstname' => 'Tom',
+                'lastname' => 'Gld',
+                'age' => '2006-01-01',
                 'city' => 'Perpignan',
                 'country' => 'France',
                 'roles' => ['ROLE_USER']
@@ -119,7 +119,7 @@ class AppFixtures extends Fixture
                 'name' => 'Montagnes dorées',
                 'description' => 'Un projet sur plusieurs jours, où l\'on perçoit la beauté de paysages visibles par tous.',
                 'date_start' => '2024-12-22',
-                'date_end' => '2024-12-22',
+                'date_end' => '2024-12-30',
                 'owner_id' => 1,
                 'note_id' => 1,
                 'collaborator_id' => [1],
@@ -131,7 +131,7 @@ class AppFixtures extends Fixture
                 'date_end' => '2025-01-06',
                 'owner_id' => 2,
                 'note_id' => 2,
-                //Ajout de collaborateur plusieurs collaborator (1, 2)
+                //Ajout de plusieurs collaborator (1, 2)
                 'collaborator_id' => [1, 2],
             ],
             [
@@ -141,17 +141,17 @@ class AppFixtures extends Fixture
                 'date_end' => '2026-01-06',
                 'owner_id' => 3,
                 'note_id' => 3,
-                //Ajout de collaborateur plusieurs collaborator (1, 2)
+                //Ajout de plusieurs collaborator (1, 2)
                 'collaborator_id' => [1, 2, 3],
             ],
             [
                 'name' => 'Chat et oiseaux',
-                'description' => 'L\'histoire d\'une vie.',
+                'description' => 'L\'histoire d\'une vie. Permet de récupérer plusieurs images depuis la table image_project.',
                 'date_start' => '2026-01-06',
                 'date_end' => '2026-01-06',
                 'owner_id' => 3,
                 'note_id' => 4,
-                //Ajout de collaborateur plusieurs collaborator (1, 2)
+                //Ajout de plusieurs collaborator (1, 2)
                 'collaborator_id' => [1, 2],
             ],
 

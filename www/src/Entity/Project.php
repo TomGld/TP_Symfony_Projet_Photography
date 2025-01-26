@@ -34,7 +34,7 @@ class Project
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\ManyToMany(targetEntity: Image::class, mappedBy: 'project')]
+    #[ORM\ManyToMany(targetEntity: Image::class, mappedBy: 'project', cascade: ['remove'])]
     private Collection $images;
 
     /**
