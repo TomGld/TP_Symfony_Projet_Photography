@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ProjectRepository $projectRepository, UserRepository $userRepository): Response
     {
-        $title = 'Tous les projets :';
+        $title = 'Tous les projets';
         $projects = $projectRepository->findAllProjectsImagesCollaborators();
         
         
