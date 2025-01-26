@@ -34,6 +34,8 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+
+            return $security->login($user, 'debug.security.authenticator.form_login.main', 'main');
         }
 
         return $this->render('registration/register.html.twig', [
