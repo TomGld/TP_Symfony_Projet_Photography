@@ -1,0 +1,9 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        images:
+            uri_prefix: /user_images  # URL d'accès aux images via HTTP
+            upload_destination: '%kernel.project_dir%/public/user_images'  # Dossier où les images seront stockées sur le serveur
+            delete_on_update: true  # Supprimer l'image du disque lors de la mise à jour (si nécessaire)
+            delete_on_remove: true  # Supprimer l'image du disque lors de la suppression
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer  # Génération d'un nom unique pour éviter les collisions de fichiers

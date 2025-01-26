@@ -43,14 +43,16 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         //menu principal
+        //Accueil du site
+        yield MenuItem::linkToUrl('Accueil du site', 'fa fa-home', '/');
         yield MenuItem::linkToDashboard('Accueil - dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
 
         //Menu "Projects"
-            yield MenuItem::subMenu('Projets', 'fa fa-tags')->setSubItems([
-                MenuItem::linkToCrud('Ajouter un projet', 'fa fa-plus-circle', Project::class)->setAction(Crud::PAGE_NEW),
-                MenuItem::linkToCrud('Voir les projets', 'fa fa-eye', Project::class) // Si l'on ne lui dit pas de renvoyer quelque part, il renvoie automatiquement sur la page index.
-                ]);
+        yield MenuItem::subMenu('Projets', 'fa fa-tags')->setSubItems([
+            MenuItem::linkToCrud('Ajouter un projet', 'fa fa-plus-circle', Project::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Voir les projets', 'fa fa-eye', Project::class) // Si l'on ne lui dit pas de renvoyer quelque part, il renvoie automatiquement sur la page index.
+            ]);
 
         
     }
