@@ -5,6 +5,19 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
+
+  .btn-link{
+    //on va enlever le style du bouton
+    text-decoration: none;
+    color: $text-light;
+    //Supprimer le bleu quand on clique sur le bouton et le text-decoration (souligné)
+    &:hover{
+      text-decoration: none;
+      color: $text-light;
+    }
+    
+  }
+
 }
 
 .game-card {

@@ -1,44 +1,48 @@
 {% set dateStart = project.dateStart|date('d/m/Y') %} {# Déclarer une variable #}
 {% set dateEnd = project.dateEnd|date('d/m/Y') %} {# Déclarer une variable #}
-<div class="game-detail-card">
-    <div>
-        <div class="game-detail-content">
-            <h2 class="game-title">{{project.name}}</h2>
-            
-            {# Boucle images #}
-            <div class="game-detail-image">
-                {% for image in project.images %}
-                    <img src="{{asset('user_images/' ~ image.imagePath)}}" alt="Image du projet \"{{project.name}}\"">
-                {% endfor %}
-            </div>
+
+<a href="{{path('app_detail', {'id': project.id})}}" class="btn-link">
+
+    <div class="game-detail-card">
+        <div>
+            <div class="game-detail-content">
+                <h2 class="game-title">{{project.name}}</h2>
+                
+                {# Boucle images #}
+                <div class="game-detail-image">
+                    {% for image in project.images %}
+                        <img src="{{asset('user_images/' ~ image.imagePath)}}" alt="Image du projet \"{{project.name}}\"">
+                    {% endfor %}
+                </div>
 
 
-            <p class="game-consoles mb-3">{{project.description}}</p>
-            {# if dateStart = dateEnd alors n'afficher que dateEnd sinon, afficher dateStart ET dateEnd  #}
-            {% if dateStart == dateEnd %}
-                <p class="date">{{dateEnd}}</p>
-            {% else %}
-                <p class="date">{{dateStart}}</p>
-                <p class="date">{{dateEnd}}</p>
-            {% endif %}
-            
-            <div class="collaborators">
-                {% if project.collaborators is not empty %}
-                    {% if project.collaborators|length == 1 %}
-                        <h3>🤵🏻 Détenteur du projet :</h3>
-                    {% else %}
-                        <h3>🤵🏻 Collaborateurs :</h3>
-                    {% endif %}
-
-                    <ul>
-                        {% for collaborator in project.collaborators %}
-                            <li>{{ collaborator.firstname }} {{collaborator.lastname}}</li>
-                        {% endfor %}
-                    </ul>
+                <p class="game-consoles mb-3">{{project.description}}</p>
+                {# if dateStart = dateEnd alors n'afficher que dateEnd sinon, afficher dateStart ET dateEnd  #}
+                {% if dateStart == dateEnd %}
+                    <p class="date">{{dateEnd}}</p>
                 {% else %}
-                    <p>Le projet est en cours de création, les collaborateurs seront bientôt visibles.</p>
+                    <p class="date">{{dateStart}}</p>
+                    <p class="date">{{dateEnd}}</p>
                 {% endif %}
+                
+                <div class="collaborators">
+                    {% if project.collaborators is not empty %}
+                        {% if project.collaborators|length == 1 %}
+                            <h3>🤵🏻 Détenteur du projet :</h3>
+                        {% else %}
+                            <h3>🤵🏻 Collaborateurs :</h3>
+                        {% endif %}
+
+                        <ul>
+                            {% for collaborator in project.collaborators %}
+                                <li>{{ collaborator.firstname }} {{collaborator.lastname}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Le projet est en cours de création, les collaborateurs seront bientôt visibles.</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
+</a>
