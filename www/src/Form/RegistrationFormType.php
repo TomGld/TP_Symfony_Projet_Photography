@@ -19,20 +19,13 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Saisir votre email',
+                'label' => 'Email',
                 'attr' => ['class' => 'form-control']
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les termes.',
-                    ]),
-                ],
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
@@ -48,23 +41,23 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('firstname', null, [
-                'label' => 'Saisir votre prénom',
+                'label' => 'Prénom',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('lastname', null, [
-                'label' => 'Saisir votre nom',
+                'label' => 'Nom',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('age', null, [
-                'label' => 'Saisir votre date de naissance',
+                'label' => 'Date de naissance',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('city', null, [
-                'label' => 'Saisir votre ville',
+                'label' => 'Ville de résidence',
                 'attr' => ['class' => 'form-control']
                 ])
             ->add('country', null, [
-                'label' => 'Saisir votre pays',
+                'label' => 'Pays de résidence',
                 'attr' => ['class' => 'form-control']
             ])
         ;
