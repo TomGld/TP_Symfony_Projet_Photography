@@ -19,10 +19,10 @@
                     <p class="game-consoles mb-3">{{project.description}}</p>
                     {# if dateStart = dateEnd alors n'afficher que dateEnd sinon, afficher dateStart ET dateEnd  #}
                     {% if dateStart == dateEnd %}
-                        <p class="date">{{dateEnd}}</p>
+                        <p class="date">Date du projet : {{dateEnd}}.</p>
                     {% else %}
-                        <p class="date">{{dateStart}}</p>
-                        <p class="date">{{dateEnd}}</p>
+                        <p class="date">Date de commencement: {{dateStart}}</p>
+                        <p class="date">Date de fin: {{dateEnd}}</p>
                     {% endif %}
                     
                     <div class="collaborators">
@@ -39,7 +39,7 @@
                                 {% endfor %}
                             </ul>
                         {% else %}
-                            <p>Le projet est en cours de création, les collaborateurs seront bientôt visibles.</p>
+                            <p>Le projet est en cours de création, le/les collaborateur(s) seront bientôt visibles.</p>
                         {% endif %}
                     </div>
                 </div>

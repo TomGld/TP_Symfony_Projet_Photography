@@ -51,6 +51,7 @@ class Project
     {
         $this->images = new ArrayCollection();
         $this->collaborator = new ArrayCollection();
+        $this->note = new Note();
     }
 
     public function getId(): ?int
@@ -180,4 +181,5 @@ class Project
 
         return $this;
     }
+    
 }
