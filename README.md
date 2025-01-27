@@ -24,5 +24,9 @@ si installé l'on verra : intl
 <br>
 *Vous pouvez aller voir /admin/dashboard*
 
+# Lancer Watch
+- nnpm
+- npm run watch
+
 ## Installation de VichUploader pour téléverser des images
 - ccomposer require vich/uploader-bundleservice
